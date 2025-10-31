@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love, Rizin 💖</title>
+<title>For My Dearest Rizin 💖</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
@@ -14,77 +14,77 @@
   }
 
   body {
-    background: linear-gradient(135deg, #ffdde1, #b33b72);
+    background: linear-gradient(135deg, #f4acb7, #9d8189, #ffe5ec);
     font-family: 'Poppins', sans-serif;
-    color: #572649;
     text-align: center;
+    color: #fcd5ce;
     overflow-x: hidden;
   }
 
-  h1 {
+  header {
+    margin-top: 50px;
     font-family: 'Great Vibes', cursive;
-    font-size: 3rem;
-    margin-top: 80px;
-    animation: fadeIn 2s ease-in-out;
+    font-size: 2.8rem;
+    animation: fadeIn 2s ease;
   }
 
-  p {
-    font-size: 1.2rem;
-    margin-top: 20px;
-    animation: fadeIn 3s ease-in-out;
+  .subtitle {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    animation: fadeIn 3s ease;
   }
 
-  .heart {
-    color: #ff3366;
-    font-size: 30px;
-    animation: heartbeat 1.5s infinite;
-  }
-
-  .reasons {
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
     margin: 60px auto;
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 1000px;
+  }
+
+  .photo-card {
     background: rgba(255, 255, 255, 0.15);
-    padding: 30px;
     border-radius: 20px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     backdrop-filter: blur(6px);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     animation: fadeInUp 2s ease;
   }
 
-  .reasons h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    margin-bottom: 20px;
+  .photo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.35);
   }
 
-  .reasons ul {
-    list-style: none;
-    text-align: left;
+  .photo-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 
-  .reasons li {
-    font-size: 1.1rem;
-    margin: 10px 0;
-    position: relative;
-    padding-left: 25px;
-  }
-
-  .reasons li::before {
-    content: '❤️';
-    position: absolute;
-    left: 0;
+  .photo-card p {
+    padding: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   footer {
-    margin: 60px 0 30px;
-    font-size: 1rem;
+    margin: 60px 0 40px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
     color: #fff;
+    animation: fadeIn 3s ease-in;
   }
 
   @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 
   @keyframes fadeInUp {
@@ -92,12 +92,7 @@
     to {opacity: 1; transform: translateY(0);}
   }
 
-  @keyframes heartbeat {
-    0%, 100% {transform: scale(1);}
-    50% {transform: scale(1.3);}
-  }
-
-  /* Floating hearts animation */
+  /* Floating hearts */
   .floating-heart {
     position: fixed;
     bottom: 0;
@@ -105,55 +100,67 @@
     color: #ff4b5c;
     animation: floatUp 6s linear infinite;
     opacity: 0.7;
+    z-index: -1;
   }
 
   @keyframes floatUp {
     0% {transform: translateY(0) rotate(0deg); opacity: 1;}
     100% {transform: translateY(-800px) rotate(360deg); opacity: 0;}
   }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      font-size: 2.2rem;
+      margin-top: 40px;
+    }
+    .photo-card {
+      width: 90%;
+    }
+    .photo-card img {
+      height: 250px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<h1>For My Love, Rizin 💞</h1>
-<p>Hey my love, I just wanted to remind you...<br>
-you’re safe here, you’re loved here, and you mean the world to me. <span class="heart">♥</span></p>
+<header>For My Beautiful Rizin 💞</header>
+<p class="subtitle">A little space filled with love and memories — from your Zaber 💐</p>
 
-<div class="reasons">
-  <h2>Reasons Why You’re So Special</h2>
-  <ul>
-    <li>Your smile can brighten even my darkest days.</li>
-    <li>Your heart is the purest thing I’ve ever known.</li>
-    <li>You make me feel peaceful and at home.</li>
-    <li>Every time I see you, the world feels right again.</li>
-    <li>You're not just my love — you’re my calm, my safe place.</li>
-  </ul>
+<div class="gallery">
+  <div class="photo-card">
+    <img src="img1.jpg" alt="Us together">
+    <p>Every time I see this picture, I remember how my world feels right when you’re near. You’re not just my girlfriend — you’re my peace, my sunshine, my home & <strong>My Wife</strong> . 💖</p>
+  </div>
+
+  <div class="photo-card">
+    <img src="img2.jpg" alt="Our moment">
+    <p>In your smile, I see everything I’ve ever wanted. Every laugh, every look, every heartbeat — all of it belongs with you, forever and always. 💞</p>
+  </div>
+
+  <div class="photo-card">
+    <img src="img3.jpg" alt="Together forever">
+    <p>No matter where life takes us, one thing will never change — my heart will always choose you, again and again, Rizin. You’re my forever person. ❤️</p>
+  </div>
 </div>
 
-<p style="font-size:1.2rem; margin: 40px 20px;">
-Whenever life feels heavy, remember: you’re never alone.<br>
-You’re my favorite person, and I’ll always be by your side — <b>forever.</b>
-</p>
-
-<footer>With all my love — <b>Zaber 💖</b></footer>
+<footer>With endless love — <b>Zaber 💕</b></footer>
 
 <script>
-  // Create floating hearts
+  // Floating hearts
   function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('floating-heart');
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-    heart.innerText = '❤️';
+    heart.innerText = '💖';
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
+    setTimeout(() => heart.remove(), 6000);
   }
-
-  setInterval(createHeart, 500);
+  setInterval(createHeart, 600);
 </script>
 
 </body>
 </html>
+
