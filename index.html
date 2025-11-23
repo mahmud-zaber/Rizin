@@ -1,349 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Princess Day!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-pink: #ff9a9e;
-            --deep-pink: #ff6b6b;
-            --soft-purple: #a18cd1;
-            --gold: #ffd700;
-            --white: #ffffff;
-        }
+<meta charset="UTF-8">
+<title>Whispering Stars – For Rizin</title>
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #1b0034, #4b006e);
+        color: white;
+        text-align: center;
+        overflow-x: hidden;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 40px;
+        animation: fade 1s ease-in-out;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+    @keyframes fade { from { opacity: 0;} to {opacity: 1;} }
 
-        /* Floating Background Particles */
-        .particle {
-            position: absolute;
-            bottom: -20px;
-            background-color: transparent;
-            pointer-events: none;
-            animation: floatUp linear infinite;
-            opacity: 0;
-            z-index: 0;
-        }
+    .star {
+        font-size: 40px;
+        margin-bottom: 20px;
+        animation: glow 2s infinite alternate;
+    }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(0.5) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-110vh) scale(1.2) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #fff; }
+        to { text-shadow: 0 0 20px #ff9dff; }
+    }
 
-        /* Main Container */
-        .container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            transition: all 0.5s ease;
-        }
+    button {
+        background: #ff72ff;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        margin: 10px;
+        border-radius: 15px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        /* Screens */
-        .screen {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            opacity: 1;
-            transform: scale(1);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+    button:hover {
+        background: #ff42ff;
+        transform: scale(1.05);
+    }
 
-        .hidden {
-            display: none;
-            opacity: 0;
-            transform: scale(0.9);
-        }
-
-        /* Elements */
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            background: -webkit-linear-gradient(45deg, var(--deep-pink), var(--soft-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-        }
-
-        p {
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .crown-icon {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .btn {
-            background: linear-gradient(45deg, var(--primary-pink), var(--soft-purple));
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Dancing Script', cursive;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-            outline: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        /* Message Screen Specifics */
-        .photo-frame {
-            width: 150px;
-            height: 150px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary-pink);
-            border: 4px solid var(--gold);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .message-text {
-            font-size: 1.2rem;
-            color: #444;
-            margin-bottom: 20px;
-        }
-
-        .signature {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: var(--deep-pink);
-            margin-top: 10px;
-        }
-
-        /* Music Control */
-        .music-control {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 1px solid white;
-        }
-
-    </style>
+    .hidden { display: none; }
+</style>
 </head>
 <body>
 
-    <!-- Background Container for JS Particles -->
-    <div id="particles-container"></div>
+<div class="container">
+    <div id="game"></div>
+</div>
 
-    <div class="container">
-        
-        <!-- SCREEN 1: INTRO -->
-        <div id="intro-screen" class="screen">
-            <!-- Inline SVG Crown -->
-            <svg class="crown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 16C2 16.5523 2.44772 17 3 17H21C21.5523 17 22 16.5523 22 16V6.49288C22 5.86405 21.3621 5.46898 20.8121 5.757L16.6632 7.92971C16.1764 8.18461 15.5871 8.07053 15.2279 7.65143L12.7607 4.773C12.372 4.31955 11.628 4.31955 11.2393 4.773L8.77212 7.65143C8.41288 8.07053 7.82362 8.18461 7.33683 7.92971L3.18786 5.757C2.63789 5.46898 2 5.86405 2 6.49288V16Z" fill="#FFD700" stroke="#E6C200" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="12" r="1.5" fill="#FF6B6B"/>
-                <circle cx="6" cy="10" r="1" fill="#A18CD1"/>
-                <circle cx="18" cy="10" r="1" fill="#A18CD1"/>
-            </svg>
+<script>
+let step = 0;
+let answers = [];
 
-            <h1>Hey My Love Rizin!</h1>
-            <p>There is a special delivery from your Husband.</p>
-            <button class="btn" onclick="revealMessage()">Open Gift 🎁</button>
-        </div>
+const gameSteps = [
+    {
+        text: `🌌 Everything is dark...<br><br>A tiny star whispers:<br><br>"Someone called your name, Rizin... and the universe woke up."`,
+        options: ["Begin the Journey ⭐"]
+    },
+    {
+        text: `⭐ "To reach Zaber, you must restore the sky.<br><br>First, choose a memory you'd relive with him."`,
+        options: ["Our first moment together", "A quiet walk", "A soft hug", "A moment we laughed"]
+    },
+    {
+        text: `🌙 "What is the first feeling you remember when you think of Zaber?"`,
+        options: ["Warmth", "Safety", "Excitement", "Peace", "Butterflies"]
+    },
+    {
+        text: `✨ "If you could make one wish for your future with Zaber, what would it be?"`,
+        options: ["Stay together forever", "Go on adventures", "Build a peaceful life", "Endless memories", "Love without limits"]
+    },
+    {
+        text: `💫 "Do you believe love can defeat distance, time, and fear?"`,
+        options: ["Yes", "Absolutely", "Always"]
+    },
+    {
+        text: `💖 The Heartstar glows:<br><br>"Rizin… you restored the sky.<br>Zaber’s heart opens for you."`,
+        options: ["See Final Message 💞"]
+    },
+    {
+        text: `🌟 FINAL MESSAGE 🌟<br><br>"You are the magic in my story, Rizin.<br>My heart chooses you in every universe."`,
+        options: ["Download Your Love Story 💌"]
+    }
+];
 
-        <!-- SCREEN 2: THE WISH -->
-        <div id="message-screen" class="screen hidden">
-            <div class="photo-frame">
-                👑
-            </div>
-            <h1>Happy Princess Day!</h1>
-            <div class="message-text">
-                <p>To the girl who rules my world with her smile.</p>
-                <p>You deserve to be treated like royalty not just today, but every single second. Thank you for being the queen of my heart.</p>
-                <p>Wear your invisible crown proudly today, my love!</p>
-            </div>
-            <div class="signature">
-                Forever Yours ❤️
-            </div>
-            <br>
-            <button class="btn" style="font-size: 0.9rem; padding: 10px 20px;" onclick="reset()">Read Again</button>
-        </div>
+// Load game
+function loadStep() {
+    const g = gameSteps[step];
+    let html = `<div class="star">⭐</div><h2>${g.text}</h2><br>`;
 
-    </div>
+    g.options.forEach(opt => {
+        html += `<button onclick="selectOption('${opt}')">${opt}</button><br>`;
+    });
 
-    <script>
-        // --- Configuration ---
-        const emojis = ['❤️', '✨', '👑', '🌸', '💖', '🦋'];
-        const particleCount = 40; // Number of floating background items
+    document.getElementById("game").innerHTML = html;
+}
 
-        // --- Particle System ---
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            
-            for (let i = 0; i < particleCount; i++) {
-                const span = document.createElement('span');
-                span.classList.add('particle');
-                span.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                
-                // Randomize position and animation
-                const left = Math.random() * 100;
-                const duration = 5 + Math.random() * 10; // 5s to 15s
-                const delay = Math.random() * 10;
-                const size = 1 + Math.random() * 2; // 1rem to 3rem
+// Handle answer
+function selectOption(opt) {
+    answers.push(`Step ${step + 1}: ${opt}`);
 
-                span.style.left = left + 'vw';
-                span.style.animationDuration = duration + 's';
-                span.style.animationDelay = '-' + delay + 's'; // Negative delay start immediately
-                span.style.fontSize = size + 'rem';
+    // Download file on last step
+    if (opt.includes("Download")) {
+        saveToFile();
+        return;
+    }
 
-                container.appendChild(span);
-            }
-        }
+    step++;
+    loadStep();
+}
 
-        // --- Interaction Logic ---
-        function revealMessage() {
-            const intro = document.getElementById('intro-screen');
-            const message = document.getElementById('message-screen');
-            
-            // 1. Fade out intro
-            intro.style.opacity = '0';
-            intro.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                intro.style.display = 'none';
-                
-                // 2. Show message
-                message.style.display = 'block';
-                // Small delay to allow display:block to render before opacity transition
-                setTimeout(() => {
-                    message.classList.remove('hidden');
-                    message.style.opacity = '1';
-                    message.style.transform = 'scale(1)';
-                    
-                    // 3. Trigger Confetti Explosion
-                    burstConfetti();
-                }, 50);
-            }, 400);
-        }
+// Save answers into .txt
+function saveToFile() {
+    const text = answers.join("\n");
+    const blob = new Blob([text], { type: "text/plain" });
+    const link = document.createElement("a");
 
-        function reset() {
-            const intro = document.getElementById('intro-screen');
-            const message = document.getElementById('message-screen');
+    link.href = URL.createObjectURL(blob);
+    link.download = "rizin_answers.txt";
+    link.click();
+}
 
-            message.style.opacity = '0';
-            message.style.transform = 'scale(0.9)';
+loadStep();
+</script>
 
-            setTimeout(() => {
-                message.style.display = 'none';
-                message.classList.add('hidden');
-                
-                intro.style.display = 'block';
-                setTimeout(() => {
-                    intro.style.opacity = '1';
-                    intro.style.transform = 'scale(1)';
-                }, 50);
-            }, 400);
-        }
-
-        // --- Click Burst Effect ---
-        function burstConfetti() {
-            const colors = ['#ff9a9e', '#a18cd1', '#ffd700', '#ffffff'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'absolute';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.top = '50%';
-                confetti.style.left = '50%';
-                confetti.style.borderRadius = '50%';
-                confetti.style.zIndex = '100';
-                document.body.appendChild(confetti);
-
-                const destinationX = (Math.random() - 0.5) * 600;
-                const destinationY = (Math.random() - 0.5) * 600;
-                const rotation = Math.random() * 500;
-                
-                const animation = confetti.animate([
-                    { transform: `translate(-50%, -50%) rotate(0deg)`, opacity: 1 },
-                    { transform: `translate(${destinationX}px, ${destinationY}px) rotate(${rotation}deg)`, opacity: 0 }
-                ], {
-                    duration: 1000 + Math.random() * 1000,
-                    easing: 'cubic-bezier(0, .9, .57, 1)',
-                    delay: Math.random() * 200
-                });
-
-                animation.onfinish = () => confetti.remove();
-            }
-        }
-
-        // Initialize
-        window.onload = createParticles;
-
-    </script>
 </body>
 </html>
-
