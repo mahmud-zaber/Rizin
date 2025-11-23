@@ -2,171 +2,160 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Memory Maze Adventure – For Rizin</title>
+<title>Memory Maze Adventure</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {
         margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #1a002b, #3a005f);
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #2a0047, #6300a0);
         color: white;
         text-align: center;
-        padding: 40px;
+        overflow-x: hidden;
     }
-    .box {
+
+    .container {
         max-width: 700px;
-        margin: auto;
-        padding: 40px;
-        background: rgba(255,255,255,0.1);
-        border-radius: 20px;
+        margin: 40px auto;
+        padding: 20px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 18px;
         backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 18px rgba(255,255,255,0.2);
+        animation: fadeIn 1.2s ease;
     }
-    button {
-        background: #ff84ff;
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .level-text {
+        font-size: 20px;
+        padding: 15px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 90%;
+        height: 120px;
+        padding: 12px;
+        border-radius: 12px;
         border: none;
-        padding: 15px 25px;
-        margin: 12px;
+        outline: none;
+        font-size: 16px;
+        resize: none;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 12px 25px;
+        background: #ff77d9;
+        border: none;
         font-size: 18px;
-        border-radius: 15px;
-        cursor: pointer;
         color: white;
-        transition: 0.2s;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px #ff77d9;
+        transition: 0.25s;
     }
     button:hover {
-        background: #ff3cff;
-        transform: scale(1.05);
+        background: #ff4fcf;
+        box-shadow: 0px 0px 16px #ff4fcf;
+    }
+
+    .final-message {
+        font-size: 24px;
+        font-weight: 600;
+        padding: 20px;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0px 0px 10px #ff42f0; }
+        to { text-shadow: 0px 0px 25px #ff92f7; }
     }
 </style>
 </head>
+
 <body>
 
-<div class="box">
-    <h1>💜 Memory Maze Adventure 💜</h1>
-    <div id="content"></div>
+<div class="container" id="content">
+
 </div>
 
 <script>
-let level = 0;
-let answers = [];
-
-const steps = [
-    {
-        q: "The Gate of First Sight — What moment of me still lives in your mind?",
-        options: []
-    },
-    {
-        q: "The Corridor of Hidden Smiles — Pick one smile you remember.",
-        options: []
-    },
-    {
-        q: "The Room of Warm Hands — When did you wish to hold my hand?",
-        options: []
-    },
-    {
-        q: "The Garden of Unsaid Words — What feeling you almost said?",
-        options: []
-    },
-    {
-        q: "The Path of What-Ifs — Which ‘almost’ moment could’ve been beautiful?",
-        options: []
-    },
-    {
-        q: "The Echo Chamber — When did you miss me the most?",
-        options: []
-    },
-    {
-        q: "The Lanterns of Softness — Tell me one soft thing about us.",
-        options: []
-    },
-    {
-        q: "The Crossing of Heartbeats — When did you feel close to me?",
-        options: []
-    },
-    {
-        q: "The Whisper Bridge — What’s something you secretly adore?",
-        options: []
-    },
-    {
-        q: "The Door of Fallen Guard — When did your guard fall?",
-        options: []
-    },
-    {
-        q: "The Flame of ‘Why You’ — Why me?",
-        options: []
-    },
-    {
-        q: "The Shadow of Fear — What fear you have about losing me?",
-        options: []
-    },
-    {
-        q: "The Color Room — Pick a color and emotion:",
-        options: ["Red – Passion", "Blue – Peace", "Pink – Love", "Purple – Desire", "Gold – Hope"]
-    },
-    {
-        q: "The Chamber of Futures — What future moment do you want with me?",
-        options: []
-    },
-    {
-        q: "The Heart of the Maze — Final message for me:",
-        options: []
-    }
+const levels = [
+    "LEVEL 1 — The Gate of First Sight<br><br>What was the first moment you felt something for me?",
+    "LEVEL 2 — The Corridor of Hidden Smiles<br><br>Pick one smile you gave me that still means something.",
+    "LEVEL 3 — The Room of Warm Hands<br><br>Which moment made you wish you could hold my hand?",
+    "LEVEL 4 — The Garden of Almost-Said Words<br><br>What’s one unsaid feeling you once held back?",
+    "LEVEL 5 — The Path of What-Ifs<br><br>Which ‘almost’ moment between us could’ve become beautiful?",
+    "LEVEL 6 — The Echo Chamber<br><br>When did you miss me the most?",
+    "LEVEL 7 — The Lanterns of Softness<br><br>What soft thing about us do you love?",
+    "LEVEL 8 — The Crossing of Heartbeats<br><br>When did you feel closest to me without any touch?",
+    "LEVEL 9 — The Whisper Bridge<br><br>What’s something you secretly adore about me?",
+    "LEVEL 10 — The Door of Fallen Guard<br><br>When did your guard fall because of me?",
+    "LEVEL 11 — The Flame of ‘Why You’<br><br>Why me? What makes you choose me?",
+    "LEVEL 12 — The Shadow of Fear<br><br>What fear do you have about losing me?",
+    "LEVEL 13 — The Color Room<br><br>Pick a color and connect it to our emotion.",
+    "LEVEL 14 — The Chamber of Futures<br><br>What future moment with me do you want?",
+    "LEVEL 15 — The Heart of the Maze<br><br>If your heart could tell me one truth right now… what would it say?"
 ];
 
-function loadStep() {
-    let s = steps[level];
-    let html = `<h2>${s.q}</h2><br>`;
+let current = 0;
 
-    if (s.options.length === 0) {
-        html += `
-            <textarea id="answer" 
-            style="width:90%; height:120px; border-radius:10px; padding:10px; font-size:16px;"></textarea><br><br>
-            <button onclick="nextOpen()">Next</button>
+function loadLevel() {
+    const container = document.getElementById("content");
+
+    if (current < levels.length) {
+        container.innerHTML = `
+            <h1>Memory Maze Adventure</h1>
+            <div class="level-text">${levels[current]}</div>
+
+            <textarea id="answer" placeholder="Write here, Rizin..."></textarea>
+
+            <button onclick="nextLevel()">Next</button>
         `;
+
+        // Load saved answer if exists
+        if (localStorage.getItem("maze_answer_" + current)) {
+            document.getElementById("answer").value =
+                localStorage.getItem("maze_answer_" + current);
+        }
+
     } else {
-        s.options.forEach(opt => {
-            html += `<button onclick="nextButton('${opt}')">${opt}</button><br>`;
-        });
-    }
-
-    document.getElementById("content").innerHTML = html;
-}
-
-function nextOpen() {
-    let val = document.getElementById("answer").value;
-    if (val.trim() === "") return;
-
-    answers.push(steps[level].q + " => " + val);
-    level++;
-    endCheck();
-}
-
-function nextButton(val) {
-    answers.push(steps[level].q + " => " + val);
-    level++;
-    endCheck();
-}
-
-function endCheck() {
-    if (level >= steps.length) {
-        submitAnswers();
-    } else {
-        loadStep();
+        container.innerHTML = `
+            <h1>✨ Maze Complete ✨</h1>
+            <div class="final-message">
+                You finished the Memory Maze, Rizin…  
+                and every step you took made me fall for you even deeper.  
+                Your answers are safe inside your heart — and in your browser.  
+                I love you. ❤️
+            </div>
+        `;
     }
 }
 
-function submitAnswers() {
-    fetch("save.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({ data: answers })
-    }).then(r => r.text()).then(res => {
-        document.getElementById("content").innerHTML = `
-            <h2>💖 The Maze Has Chosen You 💖</h2>
-            <p>Your journey has been saved inside Zaber's heart (and server).</p>
-        `;
-    });
+function nextLevel() {
+    const val = document.getElementById("answer").value;
+
+    // save locally
+    localStorage.setItem("maze_answer_" + current, val);
+
+    current++;
+    loadLevel();
 }
 
-loadStep();
+loadLevel();
 </script>
 
 </body>
