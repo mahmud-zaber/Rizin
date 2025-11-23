@@ -2,133 +2,168 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Whispering Stars – For Rizin</title>
+<title>Memory Maze Adventure – For Rizin</title>
 <style>
     body {
         margin: 0;
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #1b0034, #4b006e);
+        background: linear-gradient(135deg, #2a0047, #6300a0);
         color: white;
         text-align: center;
-        overflow-x: hidden;
+        padding: 40px;
     }
-
-    .container {
+    .box {
         max-width: 700px;
         margin: auto;
         padding: 40px;
-        animation: fade 1s ease-in-out;
+        background: rgba(255,255,255,0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
     }
-
-    @keyframes fade { from { opacity: 0;} to {opacity: 1;} }
-
-    .star {
-        font-size: 40px;
-        margin-bottom: 20px;
-        animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-        from { text-shadow: 0 0 5px #fff; }
-        to { text-shadow: 0 0 20px #ff9dff; }
-    }
-
     button {
-        background: #ff72ff;
-        color: white;
+        background: #ff84ff;
         border: none;
         padding: 15px 25px;
-        margin: 10px;
-        border-radius: 15px;
+        margin: 12px;
         font-size: 18px;
+        border-radius: 15px;
         cursor: pointer;
-        transition: 0.3s;
+        color: white;
+        transition: 0.2s;
     }
-
     button:hover {
-        background: #ff42ff;
+        background: #ff3cff;
         transform: scale(1.05);
     }
-
-    .hidden { display: none; }
 </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="game"></div>
+<div class="box">
+    <h1>💜 Memory Maze Adventure 💜</h1>
+    <div id="content"></div>
 </div>
 
 <script>
-let step = 0;
+let level = 0;
 let answers = [];
 
-const gameSteps = [
+const steps = [
     {
-        text: `🌌 Everything is dark...<br><br>A tiny star whispers:<br><br>"Someone called your name, Rizin... and the universe woke up."`,
-        options: ["Begin the Journey ⭐"]
+        q: "The Gate of First Sight — What moment of me still lives in your mind?",
+        options: []
     },
     {
-        text: `⭐ "To reach Zaber, you must restore the sky.<br><br>First, choose a memory you'd relive with him."`,
-        options: ["Our first moment together", "A quiet walk", "A soft hug", "A moment we laughed"]
+        q: "The Corridor of Hidden Smiles — Pick one smile you remember.",
+        options: []
     },
     {
-        text: `🌙 "What is the first feeling you remember when you think of Zaber?"`,
-        options: ["Warmth", "Safety", "Excitement", "Peace", "Butterflies"]
+        q: "The Room of Warm Hands — When did you wish to hold my hand?",
+        options: []
     },
     {
-        text: `✨ "If you could make one wish for your future with Zaber, what would it be?"`,
-        options: ["Stay together forever", "Go on adventures", "Build a peaceful life", "Endless memories", "Love without limits"]
+        q: "The Garden of Unsaid Words — What feeling you almost said?",
+        options: []
     },
     {
-        text: `💫 "Do you believe love can defeat distance, time, and fear?"`,
-        options: ["Yes", "Absolutely", "Always"]
+        q: "The Path of What-Ifs — Which ‘almost’ moment could’ve been beautiful?",
+        options: []
     },
     {
-        text: `💖 The Heartstar glows:<br><br>"Rizin… you restored the sky.<br>Zaber’s heart opens for you."`,
-        options: ["See Final Message 💞"]
+        q: "The Echo Chamber — When did you miss me the most?",
+        options: []
     },
     {
-        text: `🌟 FINAL MESSAGE 🌟<br><br>"You are the magic in my story, Rizin.<br>My heart chooses you in every universe."`,
-        options: ["Download Your Love Story 💌"]
+        q: "The Lanterns of Softness — Tell me one soft thing about us.",
+        options: []
+    },
+    {
+        q: "The Crossing of Heartbeats — When did you feel close to me?",
+        options: []
+    },
+    {
+        q: "The Whisper Bridge — What’s something you secretly adore?",
+        options: []
+    },
+    {
+        q: "The Door of Fallen Guard — When did your guard fall?",
+        options: []
+    },
+    {
+        q: "The Flame of ‘Why You’ — Why me?",
+        options: []
+    },
+    {
+        q: "The Shadow of Fear — What fear you have about losing me?",
+        options: []
+    },
+    {
+        q: "The Color Room — Pick a color and emotion:",
+        options: ["Red – Passion", "Blue – Peace", "Pink – Love", "Purple – Desire", "Gold – Hope"]
+    },
+    {
+        q: "The Chamber of Futures — What future moment do you want with me?",
+        options: []
+    },
+    {
+        q: "The Heart of the Maze — Final message for me:",
+        options: []
     }
 ];
 
-// Load game
 function loadStep() {
-    const g = gameSteps[step];
-    let html = `<div class="star">⭐</div><h2>${g.text}</h2><br>`;
+    let s = steps[level];
+    let html = `<h2>${s.q}</h2><br>`;
 
-    g.options.forEach(opt => {
-        html += `<button onclick="selectOption('${opt}')">${opt}</button><br>`;
-    });
-
-    document.getElementById("game").innerHTML = html;
-}
-
-// Handle answer
-function selectOption(opt) {
-    answers.push(`Step ${step + 1}: ${opt}`);
-
-    // Download file on last step
-    if (opt.includes("Download")) {
-        saveToFile();
-        return;
+    if (s.options.length === 0) {
+        html += `
+            <textarea id="answer" 
+            style="width:90%; height:120px; border-radius:10px; padding:10px; font-size:16px;"></textarea><br><br>
+            <button onclick="nextOpen()">Next</button>
+        `;
+    } else {
+        s.options.forEach(opt => {
+            html += `<button onclick="nextButton('${opt}')">${opt}</button><br>`;
+        });
     }
 
-    step++;
-    loadStep();
+    document.getElementById("content").innerHTML = html;
 }
 
-// Save answers into .txt
-function saveToFile() {
-    const text = answers.join("\n");
-    const blob = new Blob([text], { type: "text/plain" });
-    const link = document.createElement("a");
+function nextOpen() {
+    let val = document.getElementById("answer").value;
+    if (val.trim() === "") return;
 
-    link.href = URL.createObjectURL(blob);
-    link.download = "rizin_answers.txt";
-    link.click();
+    answers.push(steps[level].q + " => " + val);
+    level++;
+    endCheck();
+}
+
+function nextButton(val) {
+    answers.push(steps[level].q + " => " + val);
+    level++;
+    endCheck();
+}
+
+function endCheck() {
+    if (level >= steps.length) {
+        submitAnswers();
+    } else {
+        loadStep();
+    }
+}
+
+function submitAnswers() {
+    fetch("save.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ data: answers })
+    }).then(r => r.text()).then(res => {
+        document.getElementById("content").innerHTML = `
+            <h2>💖 The Maze Has Chosen You 💖</h2>
+            <p>Your journey has been saved inside Zaber's heart (and server).</p>
+        `;
+    });
 }
 
 loadStep();
