@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Memory Maze Adventure</title>
+<title>I'm Sorry, Jan…</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #1a002b, #3a005f);
+        background: linear-gradient(135deg, #1b0033, #4a0078);
         font-family: "Poppins", sans-serif;
         color: white;
         text-align: center;
@@ -17,146 +17,101 @@
 
     .container {
         max-width: 700px;
-        margin: 40px auto;
-        padding: 20px;
-        background: rgba(255,255,255,0.06);
-        border-radius: 18px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0px 0px 18px rgba(255,255,255,0.2);
+        margin: 80px auto;
+        padding: 25px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0px 0px 20px rgba(255,255,255,0.2);
         animation: fadeIn 1.2s ease;
     }
 
     @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(20px);}
+        from {opacity: 0; transform: translateY(25px);}
         to {opacity: 1; transform: translateY(0);}
     }
 
     h1 {
-        font-size: 32px;
+        font-size: 40px;
         font-weight: 700;
         margin-bottom: 10px;
-    }
-
-    .level-text {
-        font-size: 20px;
-        padding: 15px;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    textarea {
-        width: 90%;
-        height: 120px;
-        padding: 12px;
-        border-radius: 12px;
-        border: none;
-        outline: none;
-        font-size: 16px;
-        resize: none;
-    }
-
-    button {
-        margin-top: 15px;
-        padding: 12px 25px;
-        background: #ff77d9;
-        border: none;
-        font-size: 18px;
-        color: white;
-        border-radius: 25px;
-        cursor: pointer;
-        box-shadow: 0px 0px 10px #ff77d9;
-        transition: 0.25s;
-    }
-    button:hover {
-        background: #ff4fcf;
-        box-shadow: 0px 0px 16px #ff4fcf;
-    }
-
-    .final-message {
-        font-size: 24px;
-        font-weight: 600;
-        padding: 20px;
         animation: glow 2s infinite alternate;
     }
 
     @keyframes glow {
-        from { text-shadow: 0px 0px 10px #ff42f0; }
-        to { text-shadow: 0px 0px 25px #ff92f7; }
+        from { text-shadow: 0 0 15px #ff8ee8; }
+        to { text-shadow: 0 0 30px #ff41e1; }
+    }
+
+    .msg {
+        font-size: 22px;
+        line-height: 1.8;
+        padding: 20px;
+        animation: fadeText 1.6s ease;
+    }
+
+    @keyframes fadeText {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    .heart {
+        font-size: 60px;
+        animation: heartbeat 1.2s infinite;
+        margin-top: 10px;
+    }
+
+    @keyframes heartbeat {
+        0%   { transform: scale(1); }
+        25%  { transform: scale(1.2); }
+        40%  { transform: scale(1); }
+        60%  { transform: scale(1.25); }
+        100% { transform: scale(1); }
+    }
+
+    .button {
+        margin-top: 30px;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        background: #ff4ee2;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #ff4ee2;
+        transition: 0.3s;
+    }
+
+    .button:hover {
+        background: #ff26d7;
+        box-shadow: 0 0 25px #ff26d7;
+        transform: scale(1.05);
     }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="content">
+<div class="container">
+    <h1>I'm Sorry, Jan…</h1>
 
+    <div class="heart">💗</div>
+
+    <div class="msg">
+        I am Sorryy... <br><br>
+        I will never ever leave u alone, I promiseee. <br><br>
+        Plss forgive me this time jan… <br><br>
+        I know I messed up, and I know your heart deserves better.  
+        I just want you to know…  
+        I’m trying, truly.  
+        I care about you more than anything,  
+        and losing you, even for a moment, hurts like hell. <br><br>
+        You mean so much to me.  
+        And I’m not going anywhere. Ever.
+    </div>
+
+    <button class="button" onclick="window.location.href='#'">Come here, jan…</button>
 </div>
-
-<script>
-const levels = [
-    "LEVEL 1 — The Gate of First Sight<br><br>What was the first moment you felt something for me?",
-    "LEVEL 2 — The Corridor of Hidden Smiles<br><br>Pick one smile you gave me that still means something.",
-    "LEVEL 3 — The Room of Warm Hands<br><br>Which moment made you wish you could hold my hand?",
-    "LEVEL 4 — The Garden of Almost-Said Words<br><br>What’s one unsaid feeling you once held back?",
-    "LEVEL 5 — The Path of What-Ifs<br><br>Which ‘almost’ moment between us could’ve become beautiful?",
-    "LEVEL 6 — The Echo Chamber<br><br>When did you miss me the most?",
-    "LEVEL 7 — The Lanterns of Softness<br><br>What soft thing about us do you love?",
-    "LEVEL 8 — The Crossing of Heartbeats<br><br>When did you feel closest to me without any touch?",
-    "LEVEL 9 — The Whisper Bridge<br><br>What’s something you secretly adore about me?",
-    "LEVEL 10 — The Door of Fallen Guard<br><br>When did your guard fall because of me?",
-    "LEVEL 11 — The Flame of ‘Why You’<br><br>Why me? What makes you choose me?",
-    "LEVEL 12 — The Shadow of Fear<br><br>What fear do you have about losing me?",
-    "LEVEL 13 — The Color Room<br><br>Pick a color and connect it to our emotion.",
-    "LEVEL 14 — The Chamber of Futures<br><br>What future moment with me do you want?",
-    "LEVEL 15 — The Heart of the Maze<br><br>If your heart could tell me one truth right now… what would it say?"
-];
-
-let current = 0;
-
-function loadLevel() {
-    const container = document.getElementById("content");
-
-    if (current < levels.length) {
-        container.innerHTML = `
-            <h1>Memory Maze Adventure</h1>
-            <div class="level-text">${levels[current]}</div>
-
-            <textarea id="answer" placeholder="Write here, Rizin..."></textarea>
-
-            <button onclick="nextLevel()">Next</button>
-        `;
-
-        // Load saved answer if exists
-        if (localStorage.getItem("maze_answer_" + current)) {
-            document.getElementById("answer").value =
-                localStorage.getItem("maze_answer_" + current);
-        }
-
-    } else {
-        container.innerHTML = `
-            <h1>✨ Maze Complete ✨</h1>
-            <div class="final-message">
-                You finished the Memory Maze, Rizin…  
-                and every step you took made me fall for you even deeper.  
-                Your answers are safe inside your heart — and in your browser.  
-                I love you. ❤️
-            </div>
-        `;
-    }
-}
-
-function nextLevel() {
-    const val = document.getElementById("answer").value;
-
-    // save locally
-    localStorage.setItem("maze_answer_" + current, val);
-
-    current++;
-    loadLevel();
-}
-
-loadLevel();
-</script>
 
 </body>
 </html>
