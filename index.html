@@ -19,17 +19,20 @@
     body{
       margin:0; font-family:var(--font-sans); color:#e6eef8; background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,129,0.06), transparent), linear-gradient(180deg,var(--bg1), var(--bg2));
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      display:flex; align-items:center; justify-content:center; padding:32px;
+      display:flex; align-items:flex-start; justify-content:center; padding:24px 16px; /* allow page scroll */
     }
     .container{
-      width:100%; max-width:960px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:18px; padding:28px; box-shadow: 0 10px 40px rgba(2,6,23,0.6);
-      position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.04);
+      width:100%; max-width:980px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:18px; padding:20px; box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      position:relative; overflow:visible; border:1px solid rgba(255,255,255,0.04);
+      margin:24px 0; max-height: calc(100vh - 48px);
     }
     header{
-      display:flex; gap:16px; align-items:center; margin-bottom:18px;
+      display:flex; gap:12px; align-items:center; margin-bottom:16px;
+      flex-wrap:wrap;
     }
     .logo{
       width:64px; height:64px; border-radius:12px; background:linear-gradient(135deg,var(--accent), #7c5cff); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:22px; color:white; box-shadow:0 6px 18px rgba(111,66,193,0.18);
+      flex:0 0 auto;
     }
     h1{font-size:20px; margin:0}
     p.lead{margin:0; color:var(--muted); font-size:13px}
@@ -37,10 +40,11 @@
     .stage{
       display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start;
     }
-    @media (max-width:900px){.stage{grid-template-columns:1fr;}}
+    @media (max-width:900px){.stage{grid-template-columns:1fr 1fr; grid-auto-rows:min-content}}
+    @media (max-width:720px){.stage{grid-template-columns:1fr;}}
 
-    .card{background:var(--card); padding:18px; border-radius:12px; min-height:360px; position:relative; overflow:hidden}
-    .story-viewport{height:100%; display:flex; flex-direction:column; gap:12px; align-items:flex-start; justify-content:center}
+    .card{background:var(--card); padding:12px; border-radius:12px; min-height:200px; position:relative; overflow:hidden}
+    .story-viewport{display:flex; flex-direction:column; gap:12px; align-items:flex-start; justify-content:flex-start; padding:12px; overflow:auto; -webkit-overflow-scrolling:touch; max-height: calc(100vh - 320px);}
 
     /* typewriter lines */
     .line{font-size:18px; line-height:1.4; opacity:0; transform:translateY(12px);}
@@ -48,10 +52,11 @@
 
     /* right column */
     .side{
-      padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent); height:100%; display:flex; flex-direction:column; gap:12px; align-items:stretch; justify-content:flex-start;
+      padding:14px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent); height:100%; display:flex; flex-direction:column; gap:12px; align-items:stretch; justify-content:flex-start;
+      min-width:220px;
     }
 
-    .big-heart{font-size:80px; text-align:center; margin-top:8px; opacity:0.08}
+    .big-heart{font-size:72px; text-align:center; margin-top:8px; opacity:0.08}
 
     .controls{display:flex; gap:8px; margin-top:10px}
     button{
@@ -76,13 +81,12 @@
     .progress > i{display:block; height:100%; width:0%; background:linear-gradient(90deg,#ffd6e0, var(--accent)); transition:width 600ms linear}
 
     /* confetti canvas */
-    #confetti{position:absolute; inset:0; pointer-events:none}
+    #confetti{position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; border-radius:18px}
 
     footer{margin-top:14px; display:flex; justify-content:space-between; align-items:center}
 
     /* small mobile adjustments */
-    @media (max-width:520px){.logo{width:54px;height:54px;font-size:18px}.side{padding:12px}.card{padding:12px}}
-  </style>
+    @media (max-width:520px){.logo{width:54px;height:54px;font-size:18px}.side{padding:10px}.card{padding:10px}.big-heart{f
 </head>
 <body>
   <div class="container" role="main">
@@ -94,7 +98,7 @@
     <header>
       <div class="logo">RZ</div>
       <div>
-        <h1>Rizin & Zaber — Our Story</h1>
+        <h1>Rizin & You — Our Story</h1>
         <p class="lead">A short animated webpage that types your love story — press the button to begin.</p>
       </div>
     </header>
@@ -121,7 +125,7 @@
           <button id="replay" class="ghost">Replay</button>
         </div>
 
-        <div class="meta"></div>
+        <div class="meta">Tip: We'll animate each sentence with a gentle typewriter and fade. You can replay anytime.</div>
 
         <div style="margin-top:auto">
           <div class="caption">Progress</div>
@@ -131,7 +135,7 @@
     </div>
 
     <footer>
-      <div class="caption">Made with ❤️ </div>
+      <div class="caption">Made with ❤️ — Press start to see the story unfold</div>
       <div class="caption">Rizin, this one's for you.</div>
     </footer>
   </div>
@@ -189,24 +193,7 @@
 
     // simple typewriter function returning a Promise
     function typeText(el, text, speed=18){
-      return new Promise(resolve=>{
-        el.textContent = '';
-        let i=0;
-        function step(){
-          if(i<=text.length){
-            el.textContent = text.slice(0,i);
-            i++;
-            setTimeout(step, speed + Math.random()*8);
-          } else {
-            resolve();
-          }
-        }
-        step();
-      });
-    }
-
-    // animate the lines sequentially
-    async function playStory(){
+      async function playStory(){
       startBtn.disabled = true; replayBtn.disabled = true;
       viewport.innerHTML = '';
       bar.style.width = '0%';
@@ -220,6 +207,9 @@
         return div;
       });
 
+      // ensure the viewport is scrolled to top before starting
+      viewport.scrollTop = 0;
+
       // step through each line
       for(let i=0;i<elems.length;i++){
         const el = elems[i];
@@ -229,9 +219,23 @@
         });
         // type text
         await typeText(el, lines[i], 20);
+        // after typing, make sure the newest line is visible
+        el.scrollIntoView({behavior:'smooth', block:'end'});
         // small pause after each line
         await new Promise(r=>setTimeout(r, 450));
         // update progress
+        const pct = Math.round(((i+1)/elems.length)*100);
+        bar.style.width = pct+'%';
+        // small highlight effect
+        el.animate([{transform:'scale(1.01)'},{transform:'scale(1)'}],{duration:280, easing:'ease-out'});
+      }
+
+      // final flourish
+      startConfetti();
+      replayBtn.disabled = false; startBtn.disabled = false;
+    }
+
+    // replay functionalityess
         const pct = Math.round(((i+1)/elems.length)*100);
         bar.style.width = pct+'%';
         // small highlight effect
@@ -314,5 +318,3 @@
   </script>
 </body>
 </html>
-
-
