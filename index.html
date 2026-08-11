@@ -1,591 +1,960 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Rizin ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>A Little Love Adventure 💗</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(180deg,#120000,#220000,#080808);
-    color:white;
-    overflow-x:hidden;
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #fff0f5;
+    color: #54243a;
+    overflow-x: hidden;
 }
 
-/* Floating Hearts */
-.hearts{
-    position:fixed;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:1;
+button {
+    font-family: inherit;
+    cursor: pointer;
 }
 
-.heart{
-    position:absolute;
-    color:#ff4d6d;
-    animation:float 10s linear infinite;
-    opacity:.6;
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
 }
 
-@keyframes float{
-    from{
-        transform:translateY(100vh) rotate(0deg);
-        opacity:0;
+.heart {
+    position: absolute;
+    bottom: -50px;
+    animation: floatHeart linear infinite;
+    opacity: .6;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
     }
-    20%{opacity:1;}
-    to{
-        transform:translateY(-100px) rotate(360deg);
-        opacity:0;
+
+    20% {
+        opacity: .7;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
     }
 }
 
-section{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    padding:80px 10%;
-    position:relative;
-    z-index:2;
+/* =========================
+   GENERAL
+========================= */
+
+.page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
 }
 
-.hero{
-    text-align:center;
+.page.active {
+    display: flex;
 }
 
-.hero h1{
-    font-size:5rem;
-    font-family:'Great Vibes',cursive;
-    color:#ff6b8a;
-    margin-bottom:20px;
+.container {
+    width: 100%;
+    max-width: 850px;
+    text-align: center;
 }
 
-.hero p{
-    max-width:800px;
-    line-height:1.8;
-    font-size:1.1rem;
+/* =========================
+   HOME
+========================= */
+
+.home-card {
+    background: rgba(255,255,255,.8);
+    backdrop-filter: blur(15px);
+    border-radius: 35px;
+    padding: 55px 30px;
+    box-shadow: 0 20px 60px rgba(160, 50, 100, .15);
 }
 
-.btn{
-    margin-top:40px;
-    padding:16px 35px;
-    border:none;
-    border-radius:40px;
-    background:#ff4d6d;
-    color:white;
-    font-size:1rem;
-    cursor:pointer;
-    transition:.3s;
-    text-decoration:none;
+.big-heart {
+    font-size: 80px;
+    animation: heartbeat 1.4s infinite;
 }
 
-.btn:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 30px #ff4d6d;
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    15% { transform: scale(1.18); }
+    30% { transform: scale(1); }
 }
 
-.glass{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:25px;
-    padding:40px;
+h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    margin: 15px 0;
 }
 
-.title{
-    font-size:3rem;
-    color:#ff7d99;
-    margin-bottom:30px;
-    text-align:center;
-    font-family:'Great Vibes',cursive;
+.subtitle {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: auto;
+    color: #81536a;
 }
 
-.letter{
-    max-width:900px;
-    line-height:2;
-    font-size:1.1rem;
+.main-btn {
+    margin-top: 30px;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#ff6b9d,#ff3f78);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(255,63,120,.3);
+    transition: .3s;
 }
 
-.photo-section{
-    width:100%;
-    max-width:1000px;
+.main-btn:hover {
+    transform: translateY(-4px) scale(1.03);
 }
 
-.photo-card{
-    background:rgba(255,255,255,.07);
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 0 25px rgba(255,77,109,.2);
+/* =========================
+   GAME CARD
+========================= */
+
+.game-card {
+    background: rgba(255,255,255,.9);
+    border-radius: 30px;
+    padding: 35px 25px;
+    box-shadow: 0 20px 60px rgba(160, 50, 100, .15);
 }
 
-.photo-card img{
-    width:100%;
-    height:500px;
-    object-fit:cover;
+.game-title {
+    font-size: 2rem;
+    margin-bottom: 8px;
 }
 
-.photo-content{
-    padding:40px;
+.game-description {
+    color: #81536a;
+    margin-bottom: 20px;
 }
 
-.photo-content h2{
-    color:#ff7d99;
-    margin-bottom:15px;
+/* =========================
+   GAME 1
+========================= */
+
+#heartGame {
+    position: relative;
+    height: 430px;
+    border-radius: 25px;
+    background: linear-gradient(180deg,#fff4f8,#ffe0eb);
+    overflow: hidden;
+    margin-top: 20px;
+    border: 2px solid #ffd0df;
 }
 
-.photo-content p{
-    line-height:1.9;
+.score {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.reason-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    width:100%;
-    max-width:1200px;
+.catch-heart {
+    position: absolute;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
+    animation: heartDrop linear forwards;
 }
 
-.reason{
-    padding:25px;
-    border-radius:20px;
-    background:rgba(255,255,255,.08);
-    text-align:center;
-    transition:.3s;
+@keyframes heartDrop {
+    from {
+        transform: translateY(-60px);
+    }
+    to {
+        transform: translateY(500px);
+    }
 }
 
-.reason:hover{
-    transform:translateY(-10px);
+/* =========================
+   QUIZ
+========================= */
+
+.question {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 25px 0;
 }
 
-.counter{
-    font-size:4rem;
-    color:#ff7d99;
-    margin:20px 0;
+.answers {
+    display: grid;
+    gap: 12px;
+    max-width: 550px;
+    margin: auto;
 }
 
-.promise{
-    width:100%;
-    max-width:800px;
+.answer {
+    padding: 15px;
+    border: 2px solid #ffd1df;
+    border-radius: 15px;
+    background: white;
+    color: #54243a;
+    transition: .2s;
 }
 
-.promise-item{
-    background:rgba(255,255,255,.08);
-    margin:15px 0;
-    padding:20px;
-    border-radius:15px;
+.answer:hover {
+    background: #fff0f5;
+    transform: translateY(-2px);
 }
 
-.final{
-    text-align:center;
+.correct {
+    background: #d9fbe5 !important;
+    border-color: #65c98a !important;
 }
 
-.final h1{
-    font-family:'Great Vibes',cursive;
-    font-size:5rem;
-    color:#ff7d99;
+.wrong {
+    background: #ffe0e0 !important;
+    border-color: #ff7777 !important;
 }
 
-.final p{
-    max-width:800px;
-    line-height:2;
-    margin:20px auto;
+/* =========================
+   LOVE LOCK
+========================= */
+
+.locks {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 30px 0;
 }
 
-#popup{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:999;
-    text-align:center;
+.key {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 2px solid #ffd0df;
+    background: white;
+    font-size: 35px;
+    transition: .3s;
 }
 
-#popup h1{
-    font-family:'Great Vibes',cursive;
-    font-size:5rem;
-    color:#ff7d99;
+.key:hover {
+    transform: translateY(-6px) rotate(-3deg);
 }
 
-#popup p{
-    font-size:1.4rem;
-    margin-top:20px;
+.key.selected {
+    background: #ff6b9d;
+    color: white;
 }
 
-.music-btn{
-    position:fixed;
-    top:20px;
-    right:20px;
-    z-index:100;
-    padding:12px 20px;
-    border:none;
-    border-radius:30px;
-    background:#ff4d6d;
-    color:white;
-    cursor:pointer;
+/* =========================
+   FINAL
+========================= */
+
+.final-card {
+    background: rgba(255,255,255,.92);
+    border-radius: 35px;
+    padding: 50px 30px;
+    box-shadow: 0 20px 70px rgba(160, 50, 100, .2);
 }
 
-@media(max-width:768px){
-
-.hero h1{
-    font-size:3rem;
+.final-heart {
+    font-size: 90px;
+    animation: heartbeat 1.3s infinite;
 }
 
-.title{
-    font-size:2.3rem;
+.love-letter {
+    margin: 25px auto;
+    max-width: 650px;
+    line-height: 1.9;
+    color: #6c4054;
+    font-size: 1.05rem;
 }
 
-.final h1{
-    font-size:3rem;
+.signature {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff477f;
 }
 
-.photo-card img{
-    height:300px;
+/* =========================
+   PROGRESS
+========================= */
+
+.progress {
+    width: 100%;
+    height: 7px;
+    background: #f5d6e1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
 }
 
-.counter{
-    font-size:2.5rem;
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#ff6b9d,#ff3f78);
+    transition: .5s;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    .page {
+        padding: 15px;
+    }
+
+    .home-card,
+    .game-card,
+    .final-card {
+        padding: 30px 18px;
+    }
+
+    #heartGame {
+        height: 380px;
+    }
+
+    .key {
+        width: 80px;
+        height: 80px;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<!-- Music -->
-<audio id="music" loop>
-    <!-- Replace with your music -->
-    <source src="22.mp3" type="audio/mpeg">
-</audio>
-
-<button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
-
-<!-- Floating Hearts -->
+<!-- Floating hearts -->
 <div class="hearts" id="hearts"></div>
 
-<!-- HERO -->
-<section class="hero">
-    <h1>For My Beautiful Rizin ❤️</h1>
 
-    <p>
-        Dear Rizin,<br><br>
+<!-- =========================
+     HOME
+========================= -->
 
-        Every moment with you has become one of my favorite memories.
-        Every smile of yours makes my heart feel lighter.
-        Every conversation with you becomes a moment I never want to forget.
-        <br><br>
-        So I made this little place on the internet,
-        filled with my thoughts, feelings, and all the love I have for you.
-    </p>
+<section class="page active" id="home">
 
-    <a href="#letter" class="btn">💌 Open My Heart</a>
-</section>
+    <div class="container">
 
-<!-- LOVE LETTER -->
-<section id="letter">
+        <div class="home-card">
 
-    <div class="glass letter">
-        <h1 class="title">My Love Letter To You</h1>
+            <div class="big-heart">💗</div>
 
-        <p>
-        My Dearest Rizin,
-        <br><br>
+            <h1>A Little Love Adventure</h1>
 
-        There are billions of people in this world,
-        yet somehow my heart found its way to you.
+            <p class="subtitle">
+                Hey you... 🌸<br>
+                I made a tiny little world for you.
+                There are some games waiting for you,
+                and maybe... a secret waiting at the end. 💌
+            </p>
 
-        <br><br>
+            <button class="main-btn" onclick="startGame()">
+                Enter My Heart 💕
+            </button>
 
-        You became the person I think about during happy moments,
-        during difficult moments,
-        and even during the most ordinary moments.
+        </div>
 
-        <br><br>
-
-        Your smile has the power to brighten my day.
-        Your voice brings comfort.
-        Your presence makes everything feel better.
-
-        <br><br>
-
-        Thank you for every laugh,
-        every memory,
-        every conversation,
-        every little moment that became special because it was with you.
-
-        <br><br>
-
-        If one day you ever wonder how much you mean to me,
-        remember this:
-
-        You are loved.
-        You are appreciated.
-        You are important.
-        And you are one of the most beautiful parts of my life.
-
-        <br><br>
-
-        No matter how many days pass,
-        I will always be grateful that you came into my life.
-
-        <br><br>
-
-        Forever Yours,
-        <br>
-        ❤️ Zaber
-        </p>
     </div>
 
 </section>
 
-<!-- PHOTO 1 -->
-<section>
 
-<div class="photo-section">
+<!-- =========================
+     GAME 1
+========================= -->
 
-<div class="photo-card">
-<img src="1.jpeg" alt="Photo 1" style="max-width: 100%; height: auto;>
+<section class="page" id="game1">
 
-<div class="photo-content">
-<h2>✨ The Smile That Makes Everything Better</h2>
+    <div class="container">
 
-<p>
-Whenever I look at this picture,
-I remember how lucky I am to know someone as wonderful as you.
+        <div class="game-card">
 
-Your smile has this magical ability to turn ordinary moments into beautiful memories.
+            <h2 class="game-title">Catch My Hearts 💕</h2>
 
-If happiness had a face,
-it would probably look exactly like this.
-</p>
+            <p class="game-description">
+                Catch 10 hearts before they disappear!
+            </p>
 
-</div>
-</div>
+            <div class="score">
+                Hearts caught: <span id="heartScore">0</span>/10
+            </div>
 
-</div>
+            <div id="heartGame"></div>
 
-</section>
+        </div>
 
-<!-- PHOTO 2 -->
-<section>
-
-<div class="photo-section">
-
-<div class="photo-card">
-
-<img src="2.jpeg" alt="Photo 2" style="max-width: 100%; height: auto;>
-
-<div class="photo-content">
-
-<h2>🌸 My Favorite Person</h2>
-
-<p>
-Out of everyone in this world,
-you became my favorite person without even trying.
-
-Not because you're perfect.
-
-But because you're kind,
-beautiful,
-caring,
-and completely unforgettable.
-
-You make life feel softer,
-warmer,
-and much more meaningful.
-</p>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!-- PHOTO 3 -->
-<section>
 
-<div class="photo-section">
+<!-- =========================
+     GAME 2
+========================= -->
 
-<div class="photo-card">
+<section class="page" id="game2">
 
-<img src="3.jpeg" alt="Photo 3" style="max-width: 100%; height: auto;">
+    <div class="container">
 
-<div class="photo-content">
+        <div class="game-card">
 
-<h2>💖 The Girl I Never Want To Lose</h2>
+            <h2 class="game-title">How Well Do You Know Us? 🥰</h2>
 
-<p>
-Some people become memories.
+            <div class="progress">
+                <div class="progress-bar" id="progress"></div>
+            </div>
 
-Some become lessons.
+            <div id="quiz"></div>
 
-But you became home.
+        </div>
 
-A place where my heart feels safe.
-
-A place where I feel understood.
-
-A place I never want to leave.
-</p>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!-- REASONS -->
-<section>
 
-<h1 class="title">10 Reasons Why I Love You ❤️</h1>
+<!-- =========================
+     GAME 3
+========================= -->
 
-<div class="reason-grid">
+<section class="page" id="game3">
 
-<div class="reason">❤️ Your smile makes my day brighter.</div>
-<div class="reason">❤️ You care about me.</div>
-<div class="reason">❤️ Talking to you feels Peaceful.</div>
-<div class="reason">❤️ Your happiness matters to me.</div>
-<div class="reason">❤️ You inspire me to improve.</div>
-<div class="reason">❤️ You're adorable.</div>
-<div class="reason">❤️ Your voice comforts me.</div>
-<div class="reason">❤️ Being with you feels natural.</div>
-<div class="reason">❤️ You're my favorite notification.</div>
-<div class="reason">❤️ Because you're simply you.</div>
+    <div class="container">
 
-</div>
+        <div class="game-card">
 
-</section>
+            <h2 class="game-title">Unlock My Heart 🔐</h2>
 
-<!-- COUNTER -->
-<section>
+            <p class="game-description">
+                One of these keys unlocks my heart...
+            </p>
 
-<h1 class="title">Our Journey ❤️</h1>
+            <div class="locks">
 
-<div class="counter" id="daysTogether"></div>
+                <button class="key" onclick="chooseKey(0)">🗝️</button>
 
-<p>Every day with you becomes another page in my favorite story.</p>
+                <button class="key" onclick="chooseKey(1)">🔑</button>
 
-</section>
+                <button class="key" onclick="chooseKey(2)">💗</button>
 
-<!-- PROMISES -->
-<section>
+                <button class="key" onclick="chooseKey(3)">🌸</button>
 
-<h1 class="title">My Promises To You</h1>
+            </div>
 
-<div class="promise">
+            <p id="keyMessage"></p>
 
-<div class="promise-item">💖 I promise to support you.</div>
-<div class="promise-item">💖 I promise to listen to you.</div>
-<div class="promise-item">💖 I promise to respect you.</div>
-<div class="promise-item">💖 I promise to make you smile whenever possible.</div>
-<div class="promise-item">💖 I promise to stay beside you through every chapter of life.</div>
-<div class="promise-item">💖 I promise to choose you again and again.</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
 
-<!-- FINAL -->
-<section class="final">
 
-<h1>If I Could Give You One Thing...</h1>
+<!-- =========================
+     FINAL
+========================= -->
 
-<p>
-I would give you the ability to see yourself through my eyes.
-Then you would finally understand how special,
-beautiful,
-and precious you truly are to me.
-</p>
+<section class="page" id="final">
 
-<button class="btn" onclick="showEnding()">
-❤️ Forever & Always ❤️
-</button>
+    <div class="container">
+
+        <div class="final-card">
+
+            <div class="final-heart">💖</div>
+
+            <h1>You Found My Heart.</h1>
+
+            <p class="love-letter">
+
+                If you reached this page,
+                congratulations... you officially won my little game. 🥹💗
+
+                <br><br>
+
+                But honestly...
+
+                <br><br>
+
+                You didn't really need to play any game
+                to win my heart.
+
+                <br><br>
+
+                You already had it.
+
+                <br><br>
+
+                Somewhere between all our conversations,
+                silly moments, arguments, laughter,
+                and those little memories that only we understand...
+
+                <br><br>
+
+                you became someone incredibly special to me.
+
+                <br><br>
+
+                And if I could choose one person
+                to experience all the beautiful,
+                crazy, ordinary and extraordinary moments
+                of life with...
+
+                <br><br>
+
+                I'd choose you.
+
+                <br><br>
+
+                Today.
+
+                <br>
+
+                Tomorrow.
+
+                <br>
+
+                And every version of tomorrow after that. 🌷
+
+            </p>
+
+            <div class="signature">
+                Forever yours, ❤️
+            </div>
+
+            <button class="main-btn" onclick="restart()">
+                Play Again 💕
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- POPUP -->
-<div id="popup">
-
-<h1>I Love You, Rizin ❤️</h1>
-
-<p>
-More than yesterday.<br>
-Less than tomorrow.<br><br>
-
-Forever and always.<br><br>
-
-— Zaber ❤️
-</p>
-
-</div>
 
 <script>
 
-// Floating Hearts
-const hearts=document.getElementById("hearts");
+/* =========================
+   FLOATING BACKGROUND HEARTS
+========================= */
 
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤";
+const heartContainer = document.getElementById("hearts");
 
-heart.style.left=Math.random()*100+"%";
-heart.style.fontSize=(Math.random()*20+15)+"px";
+function createFloatingHeart() {
 
-hearts.appendChild(heart);
+    const heart = document.createElement("div");
 
-setTimeout(()=>{
-heart.remove();
-},10000);
+    heart.className = "heart";
 
-},300);
+    heart.innerHTML = ["💗","💕","💖","💘","🌸","✨"][
+        Math.floor(Math.random()*6)
+    ];
 
-// Relationship Counter
-const startDate=new Date("2025-08-03"); // CHANGE THIS
+    heart.style.left = Math.random()*100 + "%";
 
-const now=new Date();
-const diff=Math.floor((now-startDate)/(1000*60*60*24));
+    heart.style.fontSize =
+        (15 + Math.random()*25) + "px";
 
-document.getElementById("daysTogether").innerText=
-diff+" Days Together";
+    heart.style.animationDuration =
+        (6 + Math.random()*7) + "s";
 
-// Ending
-function showEnding(){
-document.getElementById("popup").style.display="flex";
+    heartContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 13000);
 }
 
-// Music
-let playing=false;
+setInterval(createFloatingHeart, 500);
 
-function toggleMusic(){
 
-const music=document.getElementById("music");
+/* =========================
+   PAGE CONTROL
+========================= */
 
-if(!playing){
-music.play();
-playing=true;
-}else{
-music.pause();
-playing=false;
+function showPage(id) {
+
+    document.querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
+
+    document.getElementById(id)
+        .classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
+
+
+/* =========================
+   START
+========================= */
+
+function startGame() {
+
+    showPage("game1");
+
+    startHeartGame();
+}
+
+
+/* =========================
+   GAME 1
+========================= */
+
+let heartScore = 0;
+let heartInterval;
+
+function startHeartGame() {
+
+    heartScore = 0;
+
+    document.getElementById("heartScore")
+        .textContent = heartScore;
+
+    const game = document.getElementById("heartGame");
+
+    game.innerHTML = "";
+
+    heartInterval = setInterval(() => {
+
+        if(heartScore >= 10) {
+            clearInterval(heartInterval);
+
+            setTimeout(() => {
+                showPage("game2");
+                loadQuestion();
+            },700);
+
+            return;
+        }
+
+        createCatchHeart();
+
+    },650);
+}
+
+
+function createCatchHeart() {
+
+    const game = document.getElementById("heartGame");
+
+    const heart = document.createElement("div");
+
+    heart.className = "catch-heart";
+
+    heart.innerHTML =
+        ["💗","💖","💕","💘"][
+            Math.floor(Math.random()*4)
+        ];
+
+    heart.style.left =
+        Math.random() * 90 + "%";
+
+    heart.style.animationDuration =
+        (2.2 + Math.random()*1.5) + "s";
+
+    heart.onclick = function() {
+
+        heartScore++;
+
+        document.getElementById("heartScore")
+            .textContent = heartScore;
+
+        heart.innerHTML = "✨";
+
+        setTimeout(() => heart.remove(),100);
+
+    };
+
+    game.appendChild(heart);
+
+    setTimeout(() => {
+
+        if(heart.parentElement) {
+            heart.remove();
+        }
+
+    },4000);
+}
+
+
+/* =========================
+   GAME 2 — QUIZ
+========================= */
+
+const questions = [
+
+    {
+        question: "What makes a relationship special? 💕",
+
+        answers: [
+            "Money",
+            "Trust & understanding",
+            "Winning arguments",
+            "Being perfect"
+        ],
+
+        correct: 1
+    },
+
+    {
+        question: "What's the best kind of date? 🌸",
+
+        answers: [
+            "Something expensive",
+            "Somewhere fancy",
+            "Anywhere with the right person",
+            "A business meeting"
+        ],
+
+        correct: 2
+    },
+
+    {
+        question: "What should love feel like? 🥰",
+
+        answers: [
+            "A competition",
+            "A safe place",
+            "A test",
+            "A responsibility"
+        ],
+
+        correct: 1
+    },
+
+    {
+        question: "And what's the most important thing? 💖",
+
+        answers: [
+            "Always choosing each other",
+            "Never disagreeing",
+            "Being rich",
+            "Taking perfect photos"
+        ],
+
+        correct: 0
+    }
+
+];
+
+let questionIndex = 0;
+
+
+function loadQuestion() {
+
+    const quiz = document.getElementById("quiz");
+
+    const q = questions[questionIndex];
+
+    document.getElementById("progress")
+        .style.width =
+        ((questionIndex / questions.length)*100) + "%";
+
+    quiz.innerHTML = `
+
+        <div class="question">
+            ${q.question}
+        </div>
+
+        <div class="answers">
+
+            ${q.answers.map((answer,index) => `
+
+                <button
+                    class="answer"
+                    onclick="answerQuestion(${index})">
+
+                    ${answer}
+
+                </button>
+
+            `).join("")}
+
+        </div>
+    `;
+}
+
+
+function answerQuestion(index) {
+
+    const q = questions[questionIndex];
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    buttons.forEach(button =>
+        button.disabled = true
+    );
+
+    if(index === q.correct) {
+
+        buttons[index].classList.add("correct");
+
+    } else {
+
+        buttons[index].classList.add("wrong");
+
+        buttons[q.correct].classList.add("correct");
+
+    }
+
+    setTimeout(() => {
+
+        questionIndex++;
+
+        if(questionIndex >= questions.length) {
+
+            questionIndex = 0;
+
+            showPage("game3");
+
+        } else {
+
+            loadQuestion();
+
+        }
+
+    },900);
+}
+
+
+/* =========================
+   GAME 3
+========================= */
+
+function chooseKey(index) {
+
+    const message =
+        document.getElementById("keyMessage");
+
+    const keys =
+        document.querySelectorAll(".key");
+
+    keys.forEach(key =>
+        key.classList.remove("selected")
+    );
+
+    keys[index].classList.add("selected");
+
+    if(index === 2) {
+
+        message.innerHTML =
+            "💖 You found it... my heart was hiding in love all along. 💖";
+
+        setTimeout(() => {
+
+            showPage("final");
+
+            createCelebration();
+
+        },1400);
+
+    } else {
+
+        message.innerHTML =
+            "Hmm... not this one. Try again, beautiful. 🌸";
+
+    }
+}
+
+
+/* =========================
+   CELEBRATION
+========================= */
+
+function createCelebration() {
+
+    for(let i=0;i<40;i++) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.innerHTML =
+                ["💖","💕","✨","🌸","💗"]
+                [Math.floor(Math.random()*5)];
+
+            heart.style.position = "fixed";
+
+            heart.style.left =
+                Math.random()*100 + "%";
+
+            heart.style.top =
+                Math.random()*100 + "%";
+
+            heart.style.fontSize =
+                (20+Math.random()*30)+"px";
+
+            heart.style.zIndex = "999";
+
+            heart.style.pointerEvents = "none";
+
+            document.body.appendChild(heart);
+
+            heart.animate([
+
+                {
+                    transform:"scale(0) translateY(0)",
+                    opacity:1
+                },
+
+                {
+                    transform:
+                        "scale(1.5) translateY(-150px)",
+                    opacity:0
+                }
+
+            ],{
+
+                duration:1500,
+                easing:"ease-out"
+
+            });
+
+            setTimeout(() =>
+                heart.remove(),1500);
+
+        },i*60);
+
+    }
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+function restart() {
+
+    questionIndex = 0;
+
+    showPage("home");
 
 }
 
@@ -593,3 +962,4 @@ playing=false;
 
 </body>
 </html>
+```
